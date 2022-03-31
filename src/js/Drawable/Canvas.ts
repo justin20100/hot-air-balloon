@@ -23,11 +23,11 @@ export class Canvas {
         this.htmlCanvasElement = document.getElementById(settings.canvas.id) as HTMLCanvasElement;
         // definir le context (ctx) grace aux settings
         this.ctx = this.htmlCanvasElement.getContext(settings.canvas.CanvasRenderingContext) as CanvasRenderingContext2D;
-        // initialisation d'un tableau vide
+        // initialisation d'un tableau vide drawables
         this.drawables = [];
-        // initialisation d'un tableau vide
+        // initialisation d'un tableau vide tress
         this.trees = [];
-        // initialisation d'un tableau vide
+        // initialisation d'un tableau vide hills
         this.hills = [];
         // appeler la function update
         this.update();
@@ -82,10 +82,15 @@ export class Canvas {
     }
 
     update() {
+        // recuperation de la largeur de la fenetre
         this.htmlCanvasElement.width = window.innerWidth;
+        // recuperation de la hauteur de la fenetre
         this.htmlCanvasElement.height = window.innerHeight;
+        // on parcoure le tableau drawables
         this.drawables.forEach((drawable: IDrawable) => {
+            // execute l'interface update de drawable
             drawable.update();
+            // execute l'interfaace draw de drawable
             drawable.draw();
         });
     }

@@ -9,8 +9,11 @@ export class Animation {
     private animated: IAnimate[];
 
     constructor(canvas: Canvas) {
+        // on recupere le canvas dans canvas
         this.canvas = canvas;
+        // initialisation d'un tableau vide inimated
         this.animated = [];
+        // appeller la fonction loadAnimated
         this.loadAnimated();
     }
 

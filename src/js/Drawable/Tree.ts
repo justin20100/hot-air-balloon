@@ -1,3 +1,4 @@
+// importations nécessaires pour pouvoir utiliser les classes et objets d'autres fichiers
 import {IDrawable} from "../Interfaces/IDrawable";
 import {settings} from "../settings";
 import {Circle} from "./Circle";
@@ -19,16 +20,25 @@ export class Tree implements IDrawable, IAnimate {
 
 
     constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, startPosition: number) {
+        // recyperation du canvas grace aux parametres
         this.canvas = canvas;
+        // recuperation du context grace aux parametres
         this.ctx = ctx;
+        // initiation de la hauteur grace a un calcule
         this.height = settings.tree.trunk.height.min + Math.random() * (settings.tree.trunk.height.max - settings.tree.trunk.height.min);
+        // initialisation sous forme de string (chaine) des valeur des couleurs arondies
         this.trunkColor = settings.tree.trunk.color.update(35, 45, 15, 20).toString();
+        // initialisation de la largeur arrondie
         this.trunkWidth = settings.tree.trunk.width.min + Math.random() * (settings.tree.trunk.width.max - settings.tree.trunk.width.min);
+        //
         this.crownColor = settings.tree.crown.color.update(80, 95, 10, 20).toString();
+        // initialisation de startPosition grace aux parametres
         this.startPosition = startPosition;
+        // initialisation de verticalStart grace a un calcule de valeur de la class settings
         this.verticalStart = (settings.tree.verticalStart.min + Math.random() * (settings.tree.verticalStart.max - settings.tree.verticalStart.min));
+        // initialisation d'un tableau vide circles
         this.circles = [];
-
+        //
         const steeps = Math.trunc(random2(settings.tree.crown.count));
         const radius = Math.trunc(random2(settings.tree.crown.radius));
         for (let i = 0; i < 2 * Math.PI; i += (2 * Math.PI) / steeps) {
@@ -37,7 +47,6 @@ export class Tree implements IDrawable, IAnimate {
                 y: -this.height + Math.sin(i) * random2(settings.tree.crown.radius) / 2
             }, radius));
         }
-
         this.update();
     }
 
